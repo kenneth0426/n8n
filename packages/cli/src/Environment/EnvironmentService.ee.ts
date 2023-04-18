@@ -164,15 +164,13 @@ export class EnvironmentService {
 	}
 
 	async initRepository(): Promise<void> {
-		if (await this.checkRepositorySetup()) {
-			throw new Error('Repository is already initialized');
+		if (!(await this.checkRepositorySetup())) {
+			// Is not initialized yet
+			await this.git.clone(this.config.remoteRepository, this.gitFolder);
+
+			await this.git.addConfig('user.email', this.config.email);
+			await this.git.addConfig('user.name', this.config.name);
 		}
-
-		// Is not initialized yet
-		await this.git.clone(this.config.remoteRepository, this.gitFolder);
-
-		await this.git.addConfig('user.email', this.config.email);
-		await this.git.addConfig('user.name', this.config.name);
 	}
 
 	async getBranches(): Promise<{ branches: string[]; currentBranch: string }> {
@@ -353,7 +351,7 @@ export class EnvironmentService {
 		data: ICredentialDataDecryptedObject,
 	): ICredentialDataDecryptedObject => {
 		for (const [key] of Object.entries(data)) {
-			data[key] = '';
+			data[key] = (data[key] as String).startsWith('={{') ? data[key] : '';
 		}
 		return data;
 	};
