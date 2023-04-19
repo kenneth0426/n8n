@@ -14,10 +14,12 @@ import {
 	encryptCredential,
 	getCredentials,
 	getSharedCredentials,
+	hasCredentialsOwnership,
 	removeCredential,
 	sanitizeCredentials,
 	saveCredential,
 	toJsonSchema,
+	transferCredentialsOwnership,
 } from './credentials.service';
 import { Container } from 'typedi';
 
@@ -98,6 +100,25 @@ export = {
 				.filter((property) => property.type !== 'hidden');
 
 			return res.json(toJsonSchema(schema));
+		},
+	],
+
+	transferCredentialOwnership: [
+		authorize(['owner', 'member']),
+		async (
+			req: CredentialRequest.TransferOwnership,
+			res: express.Response,
+		): Promise<express.Response> => {
+			const { id } = req.params;
+
+			if (await hasCredentialsOwnership(req.user, id)) {
+				await transferCredentialsOwnership(req.user, id, req.body.newOwnerId);
+				return res.json({});
+			}
+
+			// user trying to access a credential they do not own
+			// or credential does not exist
+			return res.status(404).json({ message: 'Not Found' });
 		},
 	],
 };

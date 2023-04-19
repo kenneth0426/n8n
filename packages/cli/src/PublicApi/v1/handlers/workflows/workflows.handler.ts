@@ -25,6 +25,8 @@ import {
 	getWorkflowIdsViaTags,
 	parseTagNames,
 	getWorkflowsAndCount,
+	hasWorkflowOwnership,
+	transferWorkflowOwnership,
 } from './workflows.service';
 import { WorkflowsService } from '@/workflows/workflows.services';
 import { InternalHooks } from '@/InternalHooks';
@@ -265,6 +267,24 @@ export = {
 
 			// nothing to do as the workflow is already inactive
 			return res.json(sharedWorkflow.workflow);
+		},
+	],
+	transferWorkflowOwnership: [
+		authorize(['owner', 'member']),
+		async (
+			req: WorkflowRequest.TransferOwnership,
+			res: express.Response,
+		): Promise<express.Response> => {
+			const { id } = req.params;
+
+			if (await hasWorkflowOwnership(req.user, id)) {
+				await transferWorkflowOwnership(req.user, id, req.body.newOwnerId);
+				return res.json({});
+			}
+
+			// user trying to access a workflow he does not own
+			// or workflow does not exist
+			return res.status(404).json({ message: 'Not Found' });
 		},
 	],
 };
