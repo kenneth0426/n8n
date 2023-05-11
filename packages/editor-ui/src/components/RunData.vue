@@ -510,15 +510,15 @@ import CodeNodeEditor from '@/components/CodeNodeEditor/CodeNodeEditor.vue';
 import { dataPinningEventBus } from '@/event-bus';
 import { clearJsonKey, executionDataToJson, stringSizeInBytes } from '@/utils';
 import { isEmpty } from '@/utils';
-import { useWorkflowsStore } from '@/stores/workflows';
+import { useWorkflowsStore } from '@/stores/workflows.store';
 import { mapStores } from 'pinia';
-import { useNDVStore } from '@/stores/ndv';
-import { useNodeTypesStore } from '@/stores/nodeTypes';
+import { useNDVStore } from '@/stores/ndv.store';
+import { useNodeTypesStore } from '@/stores/nodeTypes.store';
 
-const RunDataTable = () => import('@/components/RunDataTable.vue');
-const RunDataJson = () => import('@/components/RunDataJson.vue');
-const RunDataSchema = () => import('@/components/RunDataSchema.vue');
-const RunDataHtml = () => import('@/components/RunDataHtml.vue');
+const RunDataTable = async () => import('@/components/RunDataTable.vue');
+const RunDataJson = async () => import('@/components/RunDataJson.vue');
+const RunDataSchema = async () => import('@/components/RunDataSchema.vue');
+const RunDataHtml = async () => import('@/components/RunDataHtml.vue');
 
 export type EnterEditModeArgs = {
 	origin: 'editIconButton' | 'insertTestDataLink';
@@ -1062,16 +1062,14 @@ export default mixins(externalHooks, genericHelpers, nodeHelpers, pinData).exten
 				return;
 			}
 
-			const data = executionDataToJson(this.rawInputData) as INodeExecutionData[];
-
-			if (!this.isValidPinDataSize(data)) {
+			if (!this.isValidPinDataSize(this.inputData)) {
 				this.onDataPinningError({ errorType: 'data-too-large', source: 'pin-icon-click' });
 				return;
 			}
 
 			this.onDataPinningSuccess({ source: 'pin-icon-click' });
 
-			this.workflowsStore.pinData({ node: this.node, data });
+			this.workflowsStore.pinData({ node: this.node, data: this.inputData });
 
 			if (this.maxRunIndex > 0) {
 				this.$showToast({
@@ -1261,7 +1259,7 @@ export default mixins(externalHooks, genericHelpers, nodeHelpers, pinData).exten
 				return;
 			} else {
 				const bufferString = 'data:' + mimeType + ';base64,' + data;
-				const blob = await fetch(bufferString).then((d) => d.blob());
+				const blob = await fetch(bufferString).then(async (d) => d.blob());
 				saveAs(blob, fileName);
 			}
 		},
