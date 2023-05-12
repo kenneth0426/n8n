@@ -39,9 +39,12 @@
 <script lang="ts">
 import { genericHelpers } from '@/mixins/genericHelpers';
 import type { ITemplatesCategory } from '@/Interface';
-import mixins from 'vue-typed-mixins';
 
-export default mixins(genericHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [genericHelpers],
+
 	name: 'TemplateFilters',
 	props: {
 		sortOnPopulate: {

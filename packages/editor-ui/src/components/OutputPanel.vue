@@ -103,7 +103,6 @@ import type { INodeTypeDescription, IRunData, IRunExecutionData, ITaskData } fro
 import RunData from './RunData.vue';
 import RunInfo from './RunInfo.vue';
 import { pinData } from '@/mixins/pinData';
-import mixins from 'vue-typed-mixins';
 import { mapStores } from 'pinia';
 import { useUIStore } from '@/stores/ui.store';
 import { useWorkflowsStore } from '@/stores/workflows.store';
@@ -112,7 +111,11 @@ import { useNodeTypesStore } from '@/stores/nodeTypes.store';
 
 type RunDataRef = InstanceType<typeof RunData>;
 
-export default mixins(pinData).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [pinData],
+
 	name: 'OutputPanel',
 	components: { RunData, RunInfo },
 	props: {

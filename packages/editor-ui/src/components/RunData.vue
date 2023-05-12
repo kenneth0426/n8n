@@ -465,7 +465,6 @@
 
 <script lang="ts">
 import type { PropType } from 'vue';
-import mixins from 'vue-typed-mixins';
 import { saveAs } from 'file-saver';
 import type {
 	IBinaryData,
@@ -499,7 +498,6 @@ import {
 } from '@/constants';
 
 import BinaryDataDisplay from '@/components/BinaryDataDisplay.vue';
-import WarningTooltip from '@/components/WarningTooltip.vue';
 import NodeErrorView from '@/components/Error/NodeErrorView.vue';
 
 import { externalHooks } from '@/mixins/externalHooks';
@@ -524,12 +522,15 @@ export type EnterEditModeArgs = {
 	origin: 'editIconButton' | 'insertTestDataLink';
 };
 
-export default mixins(externalHooks, genericHelpers, nodeHelpers, pinData).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks, genericHelpers, nodeHelpers, pinData],
+
 	name: 'RunData',
 	components: {
 		BinaryDataDisplay,
 		NodeErrorView,
-		WarningTooltip,
 		CodeNodeEditor,
 		RunDataTable,
 		RunDataJson,

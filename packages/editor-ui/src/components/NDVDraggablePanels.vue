@@ -44,7 +44,6 @@ import type { INodeTypeDescription } from 'n8n-workflow';
 import PanelDragButton from './PanelDragButton.vue';
 
 import { LOCAL_STORAGE_MAIN_PANEL_RELATIVE_WIDTH, MAIN_NODE_PANEL_WIDTH } from '@/constants';
-import mixins from 'vue-typed-mixins';
 import { debounceHelper } from '@/mixins/debounce';
 import { mapStores } from 'pinia';
 import { useNDVStore } from '@/stores/ndv.store';
@@ -63,7 +62,11 @@ const initialMainPanelWidth: { [key: string]: number } = {
 	wide: MAIN_NODE_PANEL_WIDTH * 2,
 };
 
-export default mixins(debounceHelper).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [debounceHelper],
+
 	name: 'NDVDraggablePanels',
 	components: {
 		PanelDragButton,

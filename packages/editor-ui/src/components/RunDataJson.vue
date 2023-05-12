@@ -71,7 +71,6 @@
 
 <script lang="ts">
 import type { PropType } from 'vue';
-import mixins from 'vue-typed-mixins';
 import VueJsonPretty from 'vue-json-pretty';
 import type { IDataObject, INodeExecutionData } from 'n8n-workflow';
 import Draggable from '@/components/Draggable.vue';
@@ -87,7 +86,11 @@ import { nonExistingJsonPath } from '@/components/RunDataJsonActions.vue';
 
 const runDataJsonActions = async () => import('@/components/RunDataJsonActions.vue');
 
-export default mixins(externalHooks).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks],
+
 	name: 'run-data-json',
 	components: {
 		VueJsonPretty,

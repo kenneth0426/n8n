@@ -15,10 +15,13 @@ import { useWorkflowsStore } from '@/stores/workflows.store';
 import type { INodeTypeDescription } from 'n8n-workflow';
 import { mapStores } from 'pinia';
 
-import mixins from 'vue-typed-mixins';
 import { isCommunityPackageName } from '@/utils';
 
-export default mixins(externalHooks).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks],
+
 	name: 'NodeSettingsTabs',
 	props: {
 		value: {

@@ -61,9 +61,7 @@
 <script lang="ts">
 import { EnterpriseEditionFeature, INVITE_USER_MODAL_KEY, VIEWS } from '@/constants';
 
-import PageAlert from '@/components/PageAlert.vue';
 import type { IUser, IUserListAction } from '@/Interface';
-import mixins from 'vue-typed-mixins';
 import { useToast } from '@/composables';
 import { copyPaste } from '@/mixins/copyPaste';
 import { mapStores } from 'pinia';
@@ -73,11 +71,12 @@ import { useUsersStore } from '@/stores/users.store';
 import { useUsageStore } from '@/stores/usage.store';
 import { useSSOStore } from '@/stores/sso.store';
 
-export default mixins(copyPaste).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [copyPaste],
+
 	name: 'SettingsUsersView',
-	components: {
-		PageAlert,
-	},
 	setup() {
 		return {
 			...useToast(),

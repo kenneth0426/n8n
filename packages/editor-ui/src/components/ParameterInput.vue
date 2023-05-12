@@ -365,11 +365,7 @@ import type {
 import { NodeHelpers } from 'n8n-workflow';
 
 import CredentialsSelect from '@/components/CredentialsSelect.vue';
-import ImportParameter from '@/components/ImportParameter.vue';
 import ExpressionEdit from '@/components/ExpressionEdit.vue';
-import NodeCredentials from '@/components/NodeCredentials.vue';
-import ScopesNotice from '@/components/ScopesNotice.vue';
-import ParameterOptions from '@/components/ParameterOptions.vue';
 import ParameterIssues from '@/components/ParameterIssues.vue';
 import ResourceLocator from '@/components/ResourceLocator/ResourceLocator.vue';
 import ExpressionParameterInput from '@/components/ExpressionParameterInput.vue';
@@ -382,7 +378,6 @@ import { nodeHelpers } from '@/mixins/nodeHelpers';
 import { workflowHelpers } from '@/mixins/workflowHelpers';
 import { hasExpressionMapping, isValueExpression, isResourceLocatorValue } from '@/utils';
 
-import mixins from 'vue-typed-mixins';
 import { CODE_NODE_TYPE, CUSTOM_API_CALL_KEY, HTML_NODE_TYPE } from '@/constants';
 import type { PropType } from 'vue';
 import { debounceHelper } from '@/mixins/debounce';
@@ -396,7 +391,11 @@ import Vue from 'vue';
 
 type ResourceLocatorRef = InstanceType<typeof ResourceLocator>;
 
-export default mixins(externalHooks, nodeHelpers, workflowHelpers, debounceHelper).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks, nodeHelpers, workflowHelpers, debounceHelper],
+
 	name: 'parameter-input',
 	components: {
 		CodeNodeEditor,
@@ -404,14 +403,10 @@ export default mixins(externalHooks, nodeHelpers, workflowHelpers, debounceHelpe
 		SqlEditor,
 		ExpressionEdit,
 		ExpressionParameterInput,
-		NodeCredentials,
 		CredentialsSelect,
-		ScopesNotice,
-		ParameterOptions,
 		ParameterIssues,
 		ResourceLocator,
 		TextEdit,
-		ImportParameter,
 	},
 	props: {
 		isReadOnly: {

@@ -21,7 +21,6 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
 import { ABOUT_MODAL_KEY, VERSIONS_MODAL_KEY, VIEWS } from '@/constants';
 import { userHelpers } from '@/mixins/userHelpers';
 import type { IFakeDoor } from '@/Interface';
@@ -32,7 +31,11 @@ import { useUIStore } from '@/stores/ui.store';
 import { useSettingsStore } from '@/stores/settings.store';
 import { useRootStore } from '@/stores/n8nRoot.store';
 
-export default mixins(userHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [userHelpers],
+
 	name: 'SettingsSidebar',
 	computed: {
 		...mapStores(useRootStore, useSettingsStore, useUIStore),

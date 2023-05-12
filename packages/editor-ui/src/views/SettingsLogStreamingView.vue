@@ -81,7 +81,6 @@
 <script lang="ts">
 import { v4 as uuid } from 'uuid';
 import { mapStores } from 'pinia';
-import mixins from 'vue-typed-mixins';
 import { useWorkflowsStore } from '../stores/workflows.store';
 import { useUsersStore } from '../stores/users.store';
 import { useCredentialsStore } from '../stores/credentials.store';
@@ -91,15 +90,17 @@ import { useUIStore } from '../stores/ui.store';
 import { LOG_STREAM_MODAL_KEY, EnterpriseEditionFeature } from '../constants';
 import type { MessageEventBusDestinationOptions } from 'n8n-workflow';
 import { deepCopy, defaultMessageEventBusDestinationOptions } from 'n8n-workflow';
-import PageViewLayout from '@/components/layouts/PageViewLayout.vue';
 import EventDestinationCard from '@/components/SettingsLogStreaming/EventDestinationCard.ee.vue';
 import { createEventBus } from '@/event-bus';
 
-export default mixins().extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [],
+
 	name: 'SettingsLogStreamingView',
 	props: {},
 	components: {
-		PageViewLayout,
 		EventDestinationCard,
 	},
 	data() {

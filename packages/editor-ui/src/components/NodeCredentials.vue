@@ -119,7 +119,6 @@ import { useToast } from '@/composables';
 
 import TitledList from '@/components/TitledList.vue';
 
-import mixins from 'vue-typed-mixins';
 import { mapStores } from 'pinia';
 import { useUIStore } from '@/stores/ui.store';
 import { useUsersStore } from '@/stores/users.store';
@@ -141,7 +140,11 @@ interface CredentialDropdownOption extends ICredentialsResponse {
 	typeDisplayName: string;
 }
 
-export default mixins(genericHelpers, nodeHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [genericHelpers, nodeHelpers],
+
 	name: 'NodeCredentials',
 	props: {
 		readonly: {

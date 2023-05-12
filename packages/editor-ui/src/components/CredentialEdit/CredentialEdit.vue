@@ -129,7 +129,6 @@ import type {
 import { NodeHelpers } from 'n8n-workflow';
 import CredentialIcon from '@/components/CredentialIcon.vue';
 
-import mixins from 'vue-typed-mixins';
 import { nodeHelpers } from '@/mixins/nodeHelpers';
 import { useToast, useMessage } from '@/composables';
 
@@ -165,7 +164,11 @@ interface NodeAccessMap {
 	[nodeType: string]: ICredentialNodeAccess | null;
 }
 
-export default mixins(nodeHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [nodeHelpers],
+
 	name: 'CredentialEdit',
 	components: {
 		CredentialSharing,

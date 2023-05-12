@@ -44,7 +44,6 @@ import { mapStores } from 'pinia';
 import { PLACEHOLDER_EMPTY_WORKFLOW_ID, WORKFLOW_SETTINGS_MODAL_KEY } from '@/constants';
 import type { IWorkflowSettings } from 'n8n-workflow';
 import { deepCopy } from 'n8n-workflow';
-import mixins from 'vue-typed-mixins';
 import { workflowHelpers } from '@/mixins/workflowHelpers';
 
 interface IWorkflowSaveSettings {
@@ -53,7 +52,11 @@ interface IWorkflowSaveSettings {
 	saveTestExecutions: boolean;
 }
 
-export default mixins(workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [workflowHelpers],
+
 	name: 'executions-info-accordion',
 	props: {
 		initiallyExpanded: {

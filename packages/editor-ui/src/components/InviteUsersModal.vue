@@ -64,8 +64,6 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
-
 import { useToast } from '@/composables';
 import { copyPaste } from '@/mixins/copyPaste';
 import Modal from './Modal.vue';
@@ -90,7 +88,11 @@ function getEmail(email: string): string {
 	return parsed;
 }
 
-export default mixins(copyPaste).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [copyPaste],
+
 	components: { Modal },
 	name: 'InviteUsersModal',
 	props: {

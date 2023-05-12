@@ -8,10 +8,13 @@ import { useSettingsStore } from '@/stores/settings.store';
 import { useUsersStore } from '@/stores/users.store';
 import type { ITelemetrySettings } from 'n8n-workflow';
 import { mapStores } from 'pinia';
-import mixins from 'vue-typed-mixins';
 import { externalHooks } from '@/mixins/externalHooks';
 
-export default mixins(externalHooks).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks],
+
 	name: 'Telemetry',
 	data() {
 		return {

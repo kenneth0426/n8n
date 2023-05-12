@@ -126,7 +126,6 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
 import { useMessage } from '@/composables';
 import WorkflowPreview from '@/components/WorkflowPreview.vue';
 import type { IExecutionUIData } from '@/mixins/executionsHelpers';
@@ -138,7 +137,11 @@ import { Dropdown as ElDropdown } from 'element-ui';
 
 type RetryDropdownRef = InstanceType<typeof ElDropdown> & { hide: () => void };
 
-export default mixins(executionHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [executionHelpers],
+
 	name: 'execution-preview',
 	components: {
 		ElDropdown,

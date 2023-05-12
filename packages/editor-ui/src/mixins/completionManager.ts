@@ -1,10 +1,13 @@
-import mixins from 'vue-typed-mixins';
 import { ExpressionExtensions } from 'n8n-workflow';
 import type { EditorView, ViewUpdate } from '@codemirror/view';
 
 import { expressionManager } from './expressionManager';
 
-export const completionManager = mixins(expressionManager).extend({
+import { defineComponent } from 'vue';
+
+export const completionManager = defineComponent({
+	mixins: [expressionManager],
+
 	data() {
 		return {
 			editor: {} as EditorView,

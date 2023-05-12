@@ -3,7 +3,6 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
 import { mapStores } from 'pinia';
 import { EditorView, keymap } from '@codemirror/view';
 import { EditorState, Prec } from '@codemirror/state';
@@ -19,7 +18,11 @@ import { inputTheme } from './theme';
 import { n8nLang } from '@/plugins/codemirror/n8nLang';
 import { completionManager } from '@/mixins/completionManager';
 
-export default mixins(completionManager, expressionManager, workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [completionManager, expressionManager, workflowHelpers],
+
 	name: 'InlineExpressionEditorInput',
 	props: {
 		value: {

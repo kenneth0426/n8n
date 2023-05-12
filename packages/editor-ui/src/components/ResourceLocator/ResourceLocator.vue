@@ -142,8 +142,6 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
-
 import type {
 	ILoadOptions,
 	INode,
@@ -157,7 +155,6 @@ import type {
 } from 'n8n-workflow';
 import ExpressionParameterInput from '@/components/ExpressionParameterInput.vue';
 import DraggableTarget from '@/components/DraggableTarget.vue';
-import ExpressionEdit from '@/components/ExpressionEdit.vue';
 import ParameterIssues from '@/components/ParameterIssues.vue';
 import ResourceLocatorDropdown from './ResourceLocatorDropdown.vue';
 import type { PropType } from 'vue';
@@ -188,11 +185,14 @@ interface IResourceLocatorQuery {
 	loading: boolean;
 }
 
-export default mixins(debounceHelper, workflowHelpers, nodeHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [debounceHelper, workflowHelpers, nodeHelpers],
+
 	name: 'resource-locator',
 	components: {
 		DraggableTarget,
-		ExpressionEdit,
 		ExpressionParameterInput,
 		ParameterIssues,
 		ResourceLocatorDropdown,

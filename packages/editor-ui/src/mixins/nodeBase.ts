@@ -1,5 +1,4 @@
 import type { PropType } from 'vue';
-import mixins from 'vue-typed-mixins';
 import type { INodeUi } from '@/Interface';
 import { deviceSupportHelpers } from '@/mixins/deviceSupportHelpers';
 import { NO_OP_NODE_TYPE } from '@/constants';
@@ -15,7 +14,11 @@ import * as NodeViewUtils from '@/utils/nodeViewUtils';
 import { useHistoryStore } from '@/stores/history.store';
 import { useCanvasStore } from '@/stores/canvas.store';
 
-export const nodeBase = mixins(deviceSupportHelpers).extend({
+import { defineComponent } from 'vue';
+
+export const nodeBase = defineComponent({
+	mixins: [deviceSupportHelpers],
+
 	mounted() {
 		// Initialize the node
 		if (this.data !== null) {

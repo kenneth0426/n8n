@@ -75,7 +75,6 @@ import type { IN8nButton, INodeUi, IRunDataDisplayMode, IUpdateInformation } fro
 
 import ParameterOptions from '@/components/ParameterOptions.vue';
 import DraggableTarget from '@/components/DraggableTarget.vue';
-import mixins from 'vue-typed-mixins';
 import { useToast } from '@/composables';
 import {
 	hasExpressionMapping,
@@ -101,7 +100,11 @@ type ParamterInputWrapperRef = InstanceType<typeof ParameterInputWrapper>;
 
 const DISPLAY_MODES_WITH_DATA_MAPPING = ['table', 'json', 'schema'];
 
-export default mixins(externalHooks).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks],
+
 	name: 'parameter-input-full',
 	components: {
 		ParameterOptions,

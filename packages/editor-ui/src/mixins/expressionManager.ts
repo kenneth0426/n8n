@@ -1,4 +1,3 @@
-import mixins from 'vue-typed-mixins';
 import { Expression, ExpressionExtensions } from 'n8n-workflow';
 import { mapStores } from 'pinia';
 import { ensureSyntaxTree } from '@codemirror/language';
@@ -12,7 +11,11 @@ import type { EditorView } from '@codemirror/view';
 import type { TargetItem } from '@/Interface';
 import type { Html, Plaintext, RawSegment, Resolvable, Segment } from '@/types/expressions';
 
-export const expressionManager = mixins(workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export const expressionManager = defineComponent({
+	mixins: [workflowHelpers],
+
 	props: {
 		targetItem: {
 			type: Object as PropType<TargetItem | null>,

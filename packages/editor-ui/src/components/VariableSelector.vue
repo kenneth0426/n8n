@@ -44,7 +44,6 @@ import type { INodeUi, IVariableItemSelected, IVariableSelectorOption } from '@/
 
 import { workflowHelpers } from '@/mixins/workflowHelpers';
 
-import mixins from 'vue-typed-mixins';
 import { mapStores } from 'pinia';
 import { useWorkflowsStore } from '@/stores/workflows.store';
 import { useRootStore } from '@/stores/n8nRoot.store';
@@ -53,7 +52,11 @@ import { useNDVStore } from '@/stores/ndv.store';
 // Node types that should not be displayed in variable selector
 const SKIPPED_NODE_TYPES = [STICKY_NODE_TYPE];
 
-export default mixins(workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [workflowHelpers],
+
 	name: 'VariableSelector',
 	components: {
 		VariableSelectorItem,

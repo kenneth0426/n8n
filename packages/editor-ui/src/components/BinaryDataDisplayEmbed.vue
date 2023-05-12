@@ -25,9 +25,9 @@ import type { PropType } from 'vue';
 import VueJsonPretty from 'vue-json-pretty';
 import { mapStores } from 'pinia';
 import { useWorkflowsStore } from '@/stores';
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
 	name: 'BinaryDataDisplayEmbed',
 	components: {
 		VueJsonPretty,

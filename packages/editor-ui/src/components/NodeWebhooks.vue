@@ -65,9 +65,11 @@ import { copyPaste } from '@/mixins/copyPaste';
 import { useToast } from '@/composables';
 import { workflowHelpers } from '@/mixins/workflowHelpers';
 
-import mixins from 'vue-typed-mixins';
+import { defineComponent } from 'vue';
 
-export default mixins(copyPaste, workflowHelpers).extend({
+export default defineComponent({
+	mixins: [copyPaste, workflowHelpers],
+
 	name: 'NodeWebhooks',
 	props: [
 		'node', // NodeUi

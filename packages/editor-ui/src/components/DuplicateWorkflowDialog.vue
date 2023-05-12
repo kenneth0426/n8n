@@ -49,8 +49,6 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
-
 import { MAX_WORKFLOW_NAME_LENGTH, PLACEHOLDER_EMPTY_WORKFLOW_ID } from '@/constants';
 import { workflowHelpers } from '@/mixins/workflowHelpers';
 import { useToast } from '@/composables';
@@ -66,7 +64,11 @@ import { useUsersStore } from '@/stores/users.store';
 import { createEventBus } from '@/event-bus';
 import { useCredentialsStore } from '@/stores';
 
-export default mixins(workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [workflowHelpers],
+
 	components: { TagsDropdown, Modal },
 	name: 'DuplicateWorkflow',
 	props: ['modalName', 'isActive', 'data'],

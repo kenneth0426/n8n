@@ -58,7 +58,6 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import mixins from 'vue-typed-mixins';
 import { externalHooks } from '@/mixins/externalHooks';
 import { nodeBase } from '@/mixins/nodeBase';
 import { nodeHelpers } from '@/mixins/nodeHelpers';
@@ -79,7 +78,11 @@ import { useWorkflowsStore } from '@/stores/workflows.store';
 import { useNDVStore } from '@/stores/ndv.store';
 import { useNodeTypesStore } from '@/stores/nodeTypes.store';
 
-export default mixins(externalHooks, nodeBase, nodeHelpers, workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks, nodeBase, nodeHelpers, workflowHelpers],
+
 	name: 'Sticky',
 	props: {
 		nodeViewScale: {

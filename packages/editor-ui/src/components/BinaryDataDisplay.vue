@@ -25,11 +25,14 @@ import BinaryDataDisplayEmbed from '@/components/BinaryDataDisplayEmbed.vue';
 
 import { nodeHelpers } from '@/mixins/nodeHelpers';
 
-import mixins from 'vue-typed-mixins';
 import { mapStores } from 'pinia';
 import { useWorkflowsStore } from '@/stores/workflows.store';
 
-export default mixins(nodeHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [nodeHelpers],
+
 	name: 'BinaryDataDisplay',
 	components: {
 		BinaryDataDisplayEmbed,

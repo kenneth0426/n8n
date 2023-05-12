@@ -108,7 +108,6 @@ import type { INodeTypeDescription } from 'n8n-workflow';
 import { getTriggerNodeServiceName } from '@/utils';
 import NodeExecuteButton from '@/components/NodeExecuteButton.vue';
 import { workflowHelpers } from '@/mixins/workflowHelpers';
-import mixins from 'vue-typed-mixins';
 import CopyInput from '@/components/CopyInput.vue';
 import NodeIcon from '@/components/NodeIcon.vue';
 import { copyPaste } from '@/mixins/copyPaste';
@@ -121,7 +120,11 @@ import type { N8nInfoAccordion } from 'n8n-design-system';
 
 type HelpRef = InstanceType<typeof N8nInfoAccordion>;
 
-export default mixins(workflowHelpers, copyPaste).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [workflowHelpers, copyPaste],
+
 	name: 'TriggerPanel',
 	components: {
 		NodeExecuteButton,

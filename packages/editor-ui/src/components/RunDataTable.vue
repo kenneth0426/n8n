@@ -165,7 +165,6 @@
 import type { INodeUi, ITableData, NDVState } from '@/Interface';
 import { getPairedItemId } from '@/utils';
 import type { PropType } from 'vue';
-import mixins from 'vue-typed-mixins';
 import type { GenericValue, IDataObject, INodeExecutionData } from 'n8n-workflow';
 import Draggable from './Draggable.vue';
 import { shorten } from '@/utils';
@@ -180,7 +179,11 @@ const MAX_COLUMNS_LIMIT = 40;
 
 type DraggableRef = InstanceType<typeof Draggable>;
 
-export default mixins(externalHooks).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks],
+
 	name: 'run-data-table',
 	components: { Draggable, MappingPill },
 	props: {

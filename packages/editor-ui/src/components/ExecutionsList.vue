@@ -282,7 +282,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import ExecutionTime from '@/components/ExecutionTime.vue';
-import WorkflowActivator from '@/components/WorkflowActivator.vue';
 import ExecutionFilter from '@/components/ExecutionFilter.vue';
 import { externalHooks } from '@/mixins/externalHooks';
 import { MODAL_CONFIRM, VIEWS, WAIT_TIME_UNLIMITED } from '@/constants';
@@ -299,18 +298,20 @@ import type {
 } from '@/Interface';
 import type { IExecutionsSummary, ExecutionStatus } from 'n8n-workflow';
 import { range as _range } from 'lodash-es';
-import mixins from 'vue-typed-mixins';
 import { mapStores } from 'pinia';
 import { useUIStore } from '@/stores/ui.store';
 import { useWorkflowsStore } from '@/stores/workflows.store';
 import { isEmpty, setPageTitle } from '@/utils';
 import { executionFilterToQueryFilter } from '@/utils/executionUtils';
 
-export default mixins(externalHooks, genericHelpers, executionHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [externalHooks, genericHelpers, executionHelpers],
+
 	name: 'ExecutionsList',
 	components: {
 		ExecutionTime,
-		WorkflowActivator,
 		ExecutionFilter,
 	},
 	setup() {

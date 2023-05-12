@@ -196,7 +196,6 @@
 
 <script lang="ts">
 import type { IUser } from '@/Interface';
-import mixins from 'vue-typed-mixins';
 
 import PageViewLayout from '@/components/layouts/PageViewLayout.vue';
 import PageViewLayoutList from '@/components/layouts/PageViewLayoutList.vue';
@@ -205,7 +204,7 @@ import {
 	GITHUB_STARS_BANNER_SHOW_UNTIL_DATE,
 	MAIN_REPOSITORY_URL,
 } from '@/constants';
-import TemplateCard from '@/components/TemplateCard.vue';
+import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
 import { debounceHelper } from '@/mixins/debounce';
 import ResourceOwnershipSelect from '@/components/forms/ResourceOwnershipSelect.ee.vue';
@@ -236,10 +235,11 @@ interface IFilters {
 type IResourceKeyType = 'credentials' | 'workflows';
 type SearchRef = InstanceType<typeof N8nInput>;
 
-export default mixins(debounceHelper).extend({
+export default defineComponent({
+	mixins: [debounceHelper],
+
 	name: 'resources-list-layout',
 	components: {
-		TemplateCard,
 		PageViewLayout,
 		PageViewLayoutList,
 		ResourceOwnershipSelect,

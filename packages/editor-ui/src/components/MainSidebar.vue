@@ -113,18 +113,16 @@
 import type { IExecutionResponse, IMenuItem, IVersion } from '@/Interface';
 import type { MessageBoxInputData } from 'element-ui/types/message-box';
 import GiftNotificationIcon from './GiftNotificationIcon.vue';
-import WorkflowSettings from '@/components/WorkflowSettings.vue';
 
 import { genericHelpers } from '@/mixins/genericHelpers';
 import { useMessage } from '@/composables';
 import { workflowHelpers } from '@/mixins/workflowHelpers';
 import { workflowRun } from '@/mixins/workflowRun';
 
-import mixins from 'vue-typed-mixins';
 import { ABOUT_MODAL_KEY, VERSIONS_MODAL_KEY, VIEWS } from '@/constants';
 import { userHelpers } from '@/mixins/userHelpers';
 import { debounceHelper } from '@/mixins/debounce';
-import Vue from 'vue';
+import Vue, { defineComponent } from 'vue';
 import { mapStores } from 'pinia';
 import { useUIStore } from '@/stores/ui.store';
 import { useSettingsStore } from '@/stores/settings.store';
@@ -135,17 +133,11 @@ import { useVersionsStore } from '@/stores/versions.store';
 import { isNavigationFailure } from 'vue-router';
 import { useVersionControlStore } from '@/stores/versionControl.store';
 
-export default mixins(
-	genericHelpers,
-	workflowHelpers,
-	workflowRun,
-	userHelpers,
-	debounceHelper,
-).extend({
+export default defineComponent({
 	name: 'MainSidebar',
+	mixins: [genericHelpers, workflowHelpers, workflowRun, userHelpers, debounceHelper],
 	components: {
 		GiftNotificationIcon,
-		WorkflowSettings,
 	},
 	setup() {
 		return {
@@ -472,7 +464,7 @@ export default mixins(
 			return defaultSettingsRoute;
 		},
 		onResize(event: UIEvent) {
-			this.callDebounced('onResizeEnd', { debounceTime: 100 }, event);
+			void this.callDebounced('onResizeEnd', { debounceTime: 100 }, event);
 		},
 		onResizeEnd(event: UIEvent) {
 			const browserWidth = (event.target as Window).outerWidth;

@@ -46,7 +46,6 @@ import type { PropType } from 'vue';
 
 import ParameterInput from '@/components/ParameterInput.vue';
 import InputHint from '@/components/ParameterInputHint.vue';
-import mixins from 'vue-typed-mixins';
 import type {
 	INodeProperties,
 	INodePropertyMode,
@@ -62,7 +61,11 @@ import { useNDVStore } from '@/stores/ndv.store';
 
 type ParamRef = InstanceType<typeof ParameterInput>;
 
-export default mixins(workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [workflowHelpers],
+
 	name: 'parameter-input-wrapper',
 	components: {
 		ParameterInput,

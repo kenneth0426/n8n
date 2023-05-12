@@ -17,11 +17,14 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
 import { copyPaste } from '@/mixins/copyPaste';
 import { useToast } from '@/composables';
 
-export default mixins(copyPaste).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [copyPaste],
+
 	props: {
 		label: {
 			type: String,

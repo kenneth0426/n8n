@@ -48,7 +48,6 @@ import type {
 	INodeTypeNameVersion,
 } from 'n8n-workflow';
 import { NodeHelpers } from 'n8n-workflow';
-import mixins from 'vue-typed-mixins';
 import { useToast, useMessage } from '@/composables';
 import { v4 as uuid } from 'uuid';
 import type { Route } from 'vue-router';
@@ -70,7 +69,11 @@ const MAX_LOADING_ATTEMPTS = 5;
 // Number of executions fetched on each page
 const LOAD_MORE_PAGE_SIZE = 100;
 
-export default mixins(executionHelpers, debounceHelper, workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [executionHelpers, debounceHelper, workflowHelpers],
+
 	name: 'executions-list',
 	components: {
 		ExecutionsSidebar,

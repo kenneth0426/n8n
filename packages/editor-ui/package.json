@@ -70,13 +70,11 @@
     "uuid": "^8.3.2",
     "v-click-outside": "^3.1.2",
     "vue": "^2.7.14",
-    "vue-agile": "^2.0.0",
     "vue-fragment": "1.5.1",
     "vue-i18n": "^8.26.7",
     "vue-infinite-loading": "^2.4.5",
     "vue-json-pretty": "1.9.3",
     "vue-router": "^3.6.5",
-    "vue-typed-mixins": "^0.2.0",
     "vue2-teleport": "^1.0.1",
     "vue2-touch-events": "^3.2.1",
     "xss": "^1.0.14"

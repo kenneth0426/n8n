@@ -21,7 +21,6 @@
 <script lang="ts">
 import type { PropType } from 'vue';
 import { mapStores } from 'pinia';
-import mixins from 'vue-typed-mixins';
 
 import type { LanguageSupport } from '@codemirror/language';
 import type { Extension } from '@codemirror/state';
@@ -39,7 +38,6 @@ import { ASK_AI_MODAL_KEY, CODE_NODE_TYPE } from '@/constants';
 import { codeNodeEditorEventBus } from '@/event-bus';
 import { useRootStore } from '@/stores/n8nRoot.store';
 import { useSettingsStore } from '@/stores/settings.store';
-import Modal from '@/components/Modal.vue';
 
 import { readOnlyEditorExtensions, writableEditorExtensions } from './baseExtensions';
 import { CODE_PLACEHOLDERS } from './constants';
@@ -47,9 +45,12 @@ import { linterExtension } from './linter';
 import { completerExtension } from './completer';
 import { codeNodeEditorTheme } from './theme';
 
-export default mixins(linterExtension, completerExtension, workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [linterExtension, completerExtension, workflowHelpers],
+
 	name: 'code-node-editor',
-	components: { Modal },
 	props: {
 		mode: {
 			type: String as PropType<CodeExecutionMode>,

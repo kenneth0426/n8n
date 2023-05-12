@@ -30,14 +30,16 @@ import type { PropType } from 'vue';
 import type { ITemplatesCollection } from '@/Interface';
 import Card from '@/components/CollectionWorkflowCard.vue';
 import CollectionCard from '@/components/CollectionCard.vue';
-import VueAgile from 'vue-agile';
 
 import { genericHelpers } from '@/mixins/genericHelpers';
-import mixins from 'vue-typed-mixins';
 
 type SliderRef = InstanceType<typeof VueAgile>;
 
-export default mixins(genericHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [genericHelpers],
+
 	name: 'CollectionsCarousel',
 	props: {
 		collections: {
@@ -62,7 +64,6 @@ export default mixins(genericHelpers).extend({
 	components: {
 		Card,
 		CollectionCard,
-		VueAgile,
 	},
 	data() {
 		return {

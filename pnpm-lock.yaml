@@ -741,9 +741,6 @@ importers:
       vue:
         specifier: ^2.7.14
         version: 2.7.14
-      vue-typed-mixins:
-        specifier: ^0.2.0
-        version: 0.2.0
       vue2-boring-avatars:
         specifier: ^0.3.8
         version: 0.3.8
@@ -955,9 +952,6 @@ importers:
       vue:
         specifier: ^2.7.14
         version: 2.7.14
-      vue-agile:
-        specifier: ^2.0.0
-        version: 2.0.0
       vue-fragment:
         specifier: 1.5.1
         version: 1.5.1(vue@2.7.14)
@@ -973,9 +967,6 @@ importers:
       vue-router:
         specifier: ^3.6.5
         version: 3.6.5(vue@2.7.14)
-      vue-typed-mixins:
-        specifier: ^0.2.0
-        version: 0.2.0
       vue2-teleport:
         specifier: ^1.0.1
         version: 1.0.1
@@ -16568,10 +16559,6 @@ packages:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
     dev: true
 
-  /lodash.orderby@4.6.0:
-    resolution: {integrity: sha512-T0rZxKmghOOf5YPnn8EY5iLYeWCpZq8G41FfqoVHH5QDTAFaghJRmAdLiadEDq+ztgM2q5PjA+Z1fOwGrLgmtg==}
-    dev: false
-
   /lodash.partialright@4.2.1:
     resolution: {integrity: sha512-yebmPMQZH7i4El6SdJTW9rn8irWl8VTcsmiWqm/I4sY8/ZjbSo0Z512HL6soeAu3mh5rhx5uIIo6kYJOQXbCxw==}
     dev: false
@@ -22607,13 +22594,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /vue-agile@2.0.0:
-    resolution: {integrity: sha512-5xkSLJQNRdQ7qpEnXj5FgLg33XKRHaTZKGP5qkvteOc/uGJX89MYCjPSgdNqJ1GYFGfdGAp0jvhihW8OMuXS3g==}
-    dependencies:
-      lodash.orderby: 4.6.0
-      lodash.throttle: 4.1.1
-    dev: false
-
   /vue-color@2.8.1:
     resolution: {integrity: sha512-BoLCEHisXi2QgwlhZBg9UepvzZZmi4176vbr+31Shen5WWZwSLVgdScEPcB+yrAtuHAz42309C0A4+WiL9lNBw==}
     dependencies:
@@ -22848,10 +22828,6 @@ packages:
       '@volar/vue-typescript': 1.0.24
       typescript: 5.0.3
     dev: true
-
-  /vue-typed-mixins@0.2.0:
-    resolution: {integrity: sha512-0OxuinandPWv3nm5k/reYkuKtX3jjPZ40Sy9roJz0ih8PUzmI7zSRiXFEJ62LsyRegw9Tqy+qMkajk7ipKP8Vg==}
-    dev: false
 
   /vue2-boring-avatars@0.3.8:
     resolution: {integrity: sha512-8vNN+zhCIiIMnSQDu0DwhJ11e9r3t4t12dromXmXDtRryBhV58NPn4XgMb4JKrBlfNK92KFrY/cxRy3nzhQfpQ==}

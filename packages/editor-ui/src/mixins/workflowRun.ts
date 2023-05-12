@@ -7,14 +7,17 @@ import { externalHooks } from '@/mixins/externalHooks';
 import { workflowHelpers } from '@/mixins/workflowHelpers';
 import { useToast } from '@/composables';
 
-import mixins from 'vue-typed-mixins';
 import { useTitleChange } from '@/composables/useTitleChange';
 import { mapStores } from 'pinia';
 import { useUIStore } from '@/stores/ui.store';
 import { useWorkflowsStore } from '@/stores/workflows.store';
 import { useRootStore } from '@/stores/n8nRoot.store';
 
-export const workflowRun = mixins(externalHooks, workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export const workflowRun = defineComponent({
+	mixins: [externalHooks, workflowHelpers],
+
 	setup() {
 		return {
 			...useTitleChange(),

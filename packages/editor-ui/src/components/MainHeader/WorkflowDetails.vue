@@ -123,7 +123,6 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
 import {
 	DUPLICATE_MODAL_KEY,
 	EnterpriseEditionFeature,
@@ -171,7 +170,11 @@ const hasChanged = (prev: string[], curr: string[]) => {
 	return curr.reduce((accu, val) => accu || !set.has(val), false);
 };
 
-export default mixins(workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [workflowHelpers],
+
 	name: 'WorkflowDetails',
 	components: {
 		TagsContainer,

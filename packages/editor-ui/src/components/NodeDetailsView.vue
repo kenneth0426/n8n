@@ -125,6 +125,7 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import type {
 	INodeConnections,
 	INodeTypeDescription,
@@ -142,7 +143,6 @@ import { workflowHelpers } from '@/mixins/workflowHelpers';
 import NodeSettings from '@/components/NodeSettings.vue';
 import NDVDraggablePanels from './NDVDraggablePanels.vue';
 
-import mixins from 'vue-typed-mixins';
 import OutputPanel from './OutputPanel.vue';
 import InputPanel from './InputPanel.vue';
 import TriggerPanel from './TriggerPanel.vue';
@@ -166,14 +166,9 @@ import { useSettingsStore } from '@/stores/settings.store';
 import useDeviceSupport from '@/composables/useDeviceSupport';
 import { useMessage } from '@/composables';
 
-export default mixins(
-	externalHooks,
-	nodeHelpers,
-	workflowHelpers,
-	workflowActivate,
-	pinData,
-).extend({
+export default defineComponent({
 	name: 'NodeDetailsView',
+	mixins: [externalHooks, nodeHelpers, workflowHelpers, workflowActivate, pinData],
 	components: {
 		NodeSettings,
 		InputPanel,

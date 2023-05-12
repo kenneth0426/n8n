@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Fragment from 'vue-fragment';
-import VueAgile from 'vue-agile';
 
 import 'regenerator-runtime/runtime';
 
@@ -11,8 +10,6 @@ import EnterpriseEdition from '@/components/EnterpriseEdition.ee.vue';
 import { useMessage } from '@/composables/useMessage';
 
 Vue.use(Fragment.Plugin);
-Vue.use(VueAgile);
-
 Vue.use(ElementUI);
 Vue.use(N8nPlugin);
 

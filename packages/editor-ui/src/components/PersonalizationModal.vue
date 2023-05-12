@@ -36,8 +36,6 @@
 </template>
 
 <script lang="ts">
-import mixins from 'vue-typed-mixins';
-
 const SURVEY_VERSION = 'v4';
 
 import {
@@ -137,7 +135,11 @@ import { useRootStore } from '@/stores/n8nRoot.store';
 import { useUsersStore } from '@/stores/users.store';
 import { createEventBus } from '@/event-bus';
 
-export default mixins(workflowHelpers).extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+	mixins: [workflowHelpers],
+
 	components: { Modal },
 	name: 'PersonalizationModal',
 	data() {

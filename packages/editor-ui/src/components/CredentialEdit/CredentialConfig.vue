@@ -149,9 +149,9 @@ import { useNodeTypesStore } from '@/stores/nodeTypes.store';
 import type { ICredentialsResponse } from '@/Interface';
 import AuthTypeSelector from '@/components/CredentialEdit/AuthTypeSelector.vue';
 import GoogleAuthButton from './GoogleAuthButton.vue';
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
 	name: 'CredentialConfig',
 	components: {
 		AuthTypeSelector,
