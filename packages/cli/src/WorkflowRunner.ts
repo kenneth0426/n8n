@@ -58,6 +58,7 @@ import { eventBus } from './eventbus';
 import { recoverExecutionDataFromEventLogMessages } from './eventbus/MessageEventBus/recoverEvents';
 import { Container } from 'typedi';
 import { InternalHooks } from './InternalHooks';
+import { ExecutionRepository } from './databases/repositories';
 
 export class WorkflowRunner {
 	activeExecutions: ActiveExecutions;
@@ -129,13 +130,20 @@ export class WorkflowRunner {
 				}
 			}
 
-			const executionFlattedData = await Db.collections.Execution.findOneBy({ id: executionId });
-
-			void Container.get(InternalHooks).onWorkflowCrashed(
+			const executionFlattedData = await Container.get(ExecutionRepository).findSingleExecution(
 				executionId,
-				executionMode,
-				executionFlattedData?.workflowData,
+				{
+					includeWorkflowData: true,
+				},
 			);
+
+			if (executionFlattedData) {
+				void Container.get(InternalHooks).onWorkflowCrashed(
+					executionId,
+					executionMode,
+					executionFlattedData?.workflowData,
+				);
+			}
 		} catch {
 			// Ignore errors
 		}
@@ -570,10 +578,17 @@ export class WorkflowRunner {
 					reject(error);
 				}
 
-				const executionDb = (await Db.collections.Execution.findOneBy({
-					id: executionId,
-				})) as IExecutionFlattedDb;
-				const fullExecutionData = ResponseHelper.unflattenExecutionData(executionDb);
+				const fullExecutionData = await Container.get(ExecutionRepository).findSingleExecution(
+					executionId,
+					{
+						includeWorkflowData: true,
+						includeData: true,
+						unflattenData: true,
+					},
+				);
+				if (!fullExecutionData) {
+					return reject(new Error(`Could not find execution with id "${executionId}"`));
+				}
 				const runData = {
 					data: fullExecutionData.data,
 					finished: fullExecutionData.finished,
