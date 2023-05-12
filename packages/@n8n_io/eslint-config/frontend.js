@@ -25,5 +25,6 @@ module.exports = {
 		'vue/no-deprecated-slot-scope-attribute': 'error',
 		'vue/no-multiple-template-root': 'error',
 		'vue/v-slot-style': 'error',
+		'vue/no-unused-components': 'error',
 	},
 };
